@@ -432,6 +432,10 @@ type Bools = GetReturnType<(a: boolean, b: boolean) => boolean[]>;
 `in`用于遍历已有接口的属性或者是遍历联合类型，一般与`keyof`结合使用
 
 ```ts
+type Keys = 'option1' | 'option2';
+type Flags = { [K in Keys]: boolean };
+
+
 type OptionsFlags<Type> = {
   [Property in keyof Type]: boolean;
 };

@@ -1,5 +1,10 @@
 /* Mapped Types */
 
+type Keys = 'option1' | 'option2';
+type Flags = { [K in Keys]: boolean };
+
+
+/* ----------------------- */
 type OptionsFlags<Type> = {
   [Property in keyof Type]: boolean;
 };
@@ -43,3 +48,24 @@ type DBFields = {
   name: { type: string; pii: true };
 };
 type ObjectsNeedingGDPRDeletion = ExtractPII<DBFields>;
+
+
+/* ----------------------- */
+type Bard = {
+  fly: () => {
+    /*  Do something */
+  };
+};
+type Fish = {
+  swim: () => {
+    /*  Do something */
+  };
+};
+const example = (fishOrBard: Fish | Bard) => {
+  // fishOrBardは'fly'というプロパティを持っているかどうかの判定
+  if ("fly" in fishOrBard) {
+    console.log(fishOrBard.fly); // Bard型として推論される
+  } else {
+    console.log(fishOrBard.swim); // Fish型として推論される
+  }
+};
